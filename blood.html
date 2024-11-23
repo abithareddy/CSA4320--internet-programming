@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Inventory Tracking</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="number"] {
+            padding: 8px;
+            margin: 5px 0;
+            width: 200px;
+        }
+        input[type="submit"] {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Blood Inventory Tracking</h1>
+
+    <form id="inventoryForm">
+        <h3>Add New Blood Product</h3>
+        <label for="bloodType">Blood Type:</label>
+        <input type="text" id="bloodType" name="bloodType" required>
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" required min="1">
+
+        <label for="expiryDate">Expiry Date:</label>
+        <input type="date" id="expiryDate" name="expiryDate" required>
+
+        <input type="submit" value="Add to Inventory">
+    </form>
+
+    <h3>Current Inventory</h3>
+    <table id="inventoryTable">
+        <thead>
+            <tr>
+                <th>Blood Type</th>
+                <th>Quantity</th>
+                <th>Expiry Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Inventory items will be dynamically added here -->
+        </tbody>
+    </table>
+
+    <script>
+        document.getElementById('inventoryForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get form values
+            const bloodType = document.getElementById('bloodType').value;
+            const quantity = document.getElementById('quantity').value;
+            const expiryDate = document.getElementById('expiryDate').value;
+
+            // Create a new row in the inventory table
+            const table = document.getElementById('inventoryTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+
+            newRow.insertCell(0).textContent = bloodType;
+            newRow.insertCell(1).textContent = quantity;
+            newRow.insertCell(2).textContent = expiryDate;
+
+            // Clear the form fields
+            document.getElementById('inventoryForm').reset();
+        });
+    </script>
+
+</body>
+</html>
